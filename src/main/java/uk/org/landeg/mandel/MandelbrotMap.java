@@ -11,19 +11,21 @@ import java.awt.geom.Rectangle2D;
  */
 public class MandelbrotMap {
   // coordinates of base map
-  private double r0[];
-  private double i0[];
+  public double r0[];
+  public double i0[];
 
   // current iterations
-  private int iterations[][];
+  public int iterations[][];
   
   // current evaluated z and r for each point
-  private double r[][];
-  private double i[][];
+  public double r[][];
+  public double i[][];
 
-  private boolean escaped[][];
+  public boolean escaped[][];
+  public int sizeX;
+  public int sizeY;
 
-  public void initMap(Rectangle2D bounds, final Point steps) {
+  public void initMap(BoundingBox bounds, final Point steps) {
     final double rRange = bounds.getMaxX() - bounds.getMinX();
     final double rStep = rRange / (double) steps.getX();
 
@@ -32,6 +34,8 @@ public class MandelbrotMap {
     
     escaped = new boolean[steps.x][steps.y];
     iterations = new int[steps.x][steps.y];
+    sizeX = steps.x;
+    sizeY = steps.y;
 
     // init r/x coords
     r0 = new double[steps.x];
@@ -58,23 +62,6 @@ public class MandelbrotMap {
     }
   }
 
-  public void iterateUntil(int x, int y, int maxIterations) {
-    double modSq;
-    double cr = r0[x];
-    double ci = i0[y];
-
-    do {
-      double rt = r[x][y];
-      r[x][y] = rt * rt - i[x][y] * i[x][y] + cr;
-      i[x][y] = 2 * rt * i[x][y] + ci;
-      modSq = (r[x][y] * r[x][y] + i[x][y] * i[x][y]);
-      iterations[x][y]++;
-    } while (iterations[x][y] <= maxIterations && modSq < 4.0);
-    if (modSq >= 4.0) {
-      escaped[x][y] = true;
-    }
-  }
-  
   public int getIterations(int x, int y) {
     return iterations[x][y];
   }
