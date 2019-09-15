@@ -131,7 +131,7 @@ public class MandelbrotDriver {
           notify = true;
 //          log.info("{} processing {}", Thread.currentThread().getName(), cell);
           final int detail = processor.solvePerimiter(map, cell, maxIterations);
-          if (cell.width > 2 && detail > 0) {
+          if (detail > 0) {
             final List<Rectangle> newCells = Mathlib.split(cell, primeContext);
             if (!newCells.isEmpty()) {
               for (Rectangle c : newCells) {
@@ -141,9 +141,11 @@ public class MandelbrotDriver {
             } 
           } else {
             // fill cell
-            for (int dx = 0 ; dx < cell.getWidth() ; dx++) {
-              for (int dy = 0 ; dy < cell.getHeight() ; dy++) {
-                map.iterations[cell.x + dx][cell.y + dy] = map.iterations[cell.x][cell.y];
+            if (cell.width > 2) {
+              for (int dx = 0 ; dx < cell.getWidth() ; dx++) {
+                for (int dy = 0 ; dy < cell.getHeight() ; dy++) {
+                  map.iterations[cell.x + dx][cell.y + dy] = map.iterations[cell.x][cell.y];
+                }
               }
             }
           }
