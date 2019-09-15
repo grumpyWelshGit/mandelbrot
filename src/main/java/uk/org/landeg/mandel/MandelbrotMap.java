@@ -2,12 +2,15 @@ package uk.org.landeg.mandel;
 
 import java.awt.Point;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Avoid storing points as objects, this is too resource hungry.
  * 
  * @author andy
  *
  */
+@Component
 public class MandelbrotMap {
   // coordinates of base map
   public double r0[];

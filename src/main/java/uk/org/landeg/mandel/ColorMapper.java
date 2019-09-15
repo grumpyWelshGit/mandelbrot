@@ -12,13 +12,14 @@ public class ColorMapper implements BiFunction<Integer, Integer, Integer>{
   Logger log = LoggerFactory.getLogger(this.getClass());
 
   @Override
-  public Integer apply(Integer i, Integer maxIterations) {
+  public Integer apply(Integer ii, Integer maxIterations) {
+    int i = ii == null? 0 : ii.intValue();
     int newcol = Color.white.getRGB();
     if (i > 0) {
       if (i == 1) {
         newcol = Color.blue.getRGB();
       }
-      else if (i == maxIterations) {
+      else if (i == maxIterations.intValue()) {
         newcol = Color.BLACK.getRGB();
       }
       else {

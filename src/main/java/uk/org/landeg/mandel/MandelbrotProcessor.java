@@ -50,7 +50,6 @@ public class MandelbrotProcessor {
       max = Math.max(its, max);
     }
     int detail = max-min;
-//    System.out.println(String.format("solving for %s : %d, %d %d", bounds,  min, max, detail));
     return detail;
   }
 }

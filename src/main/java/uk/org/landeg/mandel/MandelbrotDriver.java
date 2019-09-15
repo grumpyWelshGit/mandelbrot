@@ -46,12 +46,14 @@ public class MandelbrotDriver {
   @Autowired
   private ColorMapper colorMapper;
 
+  @Autowired
+  private MandelbrotMap map;
+
   @Bean
   CommandLineRunner runIt() {
     return args -> {
       int mapSize = 1000;
       primeContext = Mathlib.getPrimeFactors(mapSize);
-      final MandelbrotMap map = new MandelbrotMap();
       final MandelbrotProcessor processor = new MandelbrotProcessor();
 
       final BoundingBox bounds = new BoundingBox(-2.0, -2.0, 4, 4);
