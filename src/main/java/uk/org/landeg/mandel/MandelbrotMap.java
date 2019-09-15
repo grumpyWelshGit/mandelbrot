@@ -1,7 +1,6 @@
 package uk.org.landeg.mandel;
 
 import java.awt.Point;
-import java.awt.geom.Rectangle2D;
 
 /**
  * Avoid storing points as objects, this is too resource hungry.
