@@ -23,7 +23,10 @@ public class ColorMapper implements BiFunction<Integer, Integer, Integer>{
         newcol = Color.BLACK.getRGB();
       }
       else {
-        newcol = Color.HSBtoRGB(i/200.0f, 1f, 1.0f);
+//        final double h = Math.log(i);
+//        final double m = Math.log(maxIterations);
+        
+        newcol = Color.HSBtoRGB(((float)i/(float)maxIterations), 1f, 1.0f);
       }
     }
     log.debug("generating color for {} iterations {}", i, newcol);

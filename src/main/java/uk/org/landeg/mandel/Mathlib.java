@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class Mathlib {
-  public static  PrimeContext getPrimeFactors(int n) {
+  public static PrimeContext getPrimeFactors(int n) {
     final Set<Integer> primes = new PrimeSieve(n).generatePrimes();
     final List<Integer> factors = new ArrayList<>();
     int val = n;
@@ -23,8 +23,7 @@ public class Mathlib {
     }
     Collections.sort(factors);
     Collections.reverse(factors);
-    final PrimeContext context = new PrimeContext(factors);
-    return context;
+    return new PrimeContext(factors);
   }
 
   public static int highestPrimeFactor(final PrimeContext context, int n) {
@@ -50,7 +49,6 @@ public class Mathlib {
         result.add(new Rectangle(source.x + x * width, source.y + y * width, width, width));
       }
     }
-//    System.out.println("adding " + result.size() + "sub cells : " + result.toString());
     return result;
   }
 

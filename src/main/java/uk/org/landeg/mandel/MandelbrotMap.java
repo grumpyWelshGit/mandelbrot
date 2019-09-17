@@ -18,6 +18,7 @@ public class MandelbrotMap {
 
   // current iterations
   public int iterations[][];
+  public int delta[][];
   
   // current evaluated z and r for each point
   public double r[][];
@@ -26,16 +27,20 @@ public class MandelbrotMap {
   public boolean escaped[][];
   public int sizeX;
   public int sizeY;
+  
+  public double rRange;
+  public double iRange;
 
   public void initMap(BoundingBox bounds, final Point steps) {
-    final double rRange = bounds.getMaxX() - bounds.getMinX();
+    rRange = bounds.getMaxX() - bounds.getMinX();
     final double rStep = rRange / (double) steps.getX();
 
-    final double iRange = bounds.getMaxY() - bounds.getMinY();
+    iRange = bounds.getMaxY() - bounds.getMinY();
     final double iStep = iRange / (double) steps.getY();
     
     escaped = new boolean[steps.x][steps.y];
     iterations = new int[steps.x][steps.y];
+    delta = new int[steps.x][steps.y];
     sizeX = steps.x;
     sizeY = steps.y;
 

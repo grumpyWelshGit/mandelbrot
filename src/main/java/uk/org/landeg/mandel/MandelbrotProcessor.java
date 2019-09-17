@@ -2,8 +2,12 @@ package uk.org.landeg.mandel;
 
 import java.awt.Rectangle;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class MandelbrotProcessor {
   public int iterateUntil(MandelbrotMap map, int x, int y, int maxIterations) {
+    map.delta[x][y] = 0;
     if (map.escaped[x][y]) {
       return map.iterations[x][y];
     }
@@ -14,15 +18,28 @@ public class MandelbrotProcessor {
     double modSq;
     double cr = map.r0[x];
     double ci = map.i0[y];
+    boolean escaped = false;
 
+    double rt = map.r[x][y];
+    double rtSq = rt * rt;
+    
+    double i = map.i[x][y];
+    double iSq = i * i;
     do {
-      double rt = map.r[x][y];
-      map.r[x][y] = rt * rt - map.i[x][y] * map.i[x][y] + cr;
+      map.r[x][y] = rtSq - iSq + cr;
       map.i[x][y] = 2 * rt * map.i[x][y] + ci;
-      modSq = (map.r[x][y] * map.r[x][y] + map.i[x][y] * map.i[x][y]);
       map.iterations[x][y]++;
-    } while (map.iterations[x][y] < maxIterations && modSq < 4.0);
-    if (modSq >= 4.0) {
+      map.delta[x][y]++;
+
+      rt = map.r[x][y];
+      rtSq = rt * rt;
+      iSq = map.i[x][y] * map.i[x][y];
+      modSq = (rtSq + iSq);
+      if (modSq > 4.0) {
+        escaped = true;
+      }
+    } while (map.iterations[x][y] < maxIterations && !escaped);
+    if (escaped) {
       map.escaped[x][y] = true;
     }
     return map.iterations[x][y];
