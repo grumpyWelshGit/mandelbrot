@@ -13,6 +13,7 @@ public class MandelbrotContext {
   private int maxIterations;
   private PrimeContext primeContext;
   private AtomicReference<Integer> changeCount;
+  private boolean fillRects = false;
 
   public BoundingBox getBounds() {
     return bounds;
@@ -43,6 +44,12 @@ public class MandelbrotContext {
   }
   public void setChangeCount(AtomicReference<Integer> changeCount) {
     this.changeCount = changeCount;
+  }
+  public boolean isFillRects() {
+    return fillRects;
+  }
+  public void setFillRects(boolean fillRects) {
+    this.fillRects = fillRects;
   }
   
 }

@@ -102,6 +102,11 @@ public class MandelbrotService {
     viewer.setImage(image);
   }
 
+  public void toggleFill() {
+    context.setFillRects(!context.isFillRects());
+    repaint();
+  }
+
   public void renderDefault() {
     this.render(0, 0, 4);
   }

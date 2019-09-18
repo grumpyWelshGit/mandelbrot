@@ -101,6 +101,11 @@ public class FractalViewerFrame extends JFrame {
           service.repaint();
           return;
         }
+        if (e.getKeyChar() == 'g') {
+          service.toggleFill();
+          service.repaint();
+          return;
+        }
       }
       
       @Override

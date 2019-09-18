@@ -19,7 +19,7 @@ import uk.org.landeg.mandel.Mathlib;
 import uk.org.landeg.mandel.PrimeContextHolder;
 
 @Component
-@Scope(proxyMode=ScopedProxyMode.TARGET_CLASS, scopeName=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class MandelbrotWorker implements Runnable {
   Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -74,13 +74,13 @@ public class MandelbrotWorker implements Runnable {
   }
 
   private void fillCell(Rectangle cell, MandelbrotMap map) {
-//    if (cell.width > 2) {
-//      for (int dx = 0; dx < cell.getWidth(); dx++) {
-//        for (int dy = 0; dy < cell.getHeight(); dy++) {
-//          map.iterations[cell.x + dx][cell.y + dy] = map.iterations[cell.x][cell.y];
-//        }
-//      }
-//    }
+    if (context.isFillRects() && cell.width > 2) {
+      for (int dx = 0; dx < cell.getWidth(); dx++) {
+        for (int dy = 0; dy < cell.getHeight(); dy++) {
+          map.iterations[cell.x + dx][cell.y + dy] = map.iterations[cell.x][cell.y];
+        }
+      }
+    }
   }
 
 }
